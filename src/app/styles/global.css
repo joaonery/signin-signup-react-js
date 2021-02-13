@@ -84,6 +84,10 @@ input, textarea, select {
     padding-left: var(--padding-xs);
 }
 
+input:checked {
+    background-color: var(--color-primary);
+}
+
 a {
     cursor: pointer;
     color: var(--color-success);
@@ -103,6 +107,10 @@ button:active, input[type="button"]:active, input[type="submit"]:active {
 
 a:active {
     opacity: 0.5;
+}
+
+label, h1, h2, h3, h4, h5, h6, span, a {
+    color: var(--color-text);
 }
 
 label, button, input[type="button"], input[type="submit"] {
