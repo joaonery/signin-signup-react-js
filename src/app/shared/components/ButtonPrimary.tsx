@@ -1,6 +1,9 @@
 import React from 'react'
 
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+    /**
+     * Variantes para o botão
+     */
     variant?: 'contained' | 'outlined' | 'text'
 }
 const ButtonPrimary: React.FC<ButtonProps> = ({ variant,...props }) => {  

@@ -19,8 +19,8 @@ export const Signin: React.FC = () => {
     }, [email, password]);
 
     return (
-        <div className="signin-base flex-content-center flex-items-center background">
-            <div className="padding-g shadow-m border-red flex-column flex-items-center background-paper">
+        <div className="signin-base flex-content-center flex-items-center">
+            <div className="padding-g shadow-m border-radius-soft border-red flex-column flex-items-center background-paper">
                 <h2>Fazer login</h2>
 
                 <div className="margin-top-m ">
@@ -28,30 +28,29 @@ export const Signin: React.FC = () => {
                         <input
                             required
                             type="email"
+                            className="background padding-m font-size-m"
                             minLength={2}
                             value={email}
                             onChange={(e) => setEmail(e.target.value)}
                             placeholder="Digite seu email"
-                            className="background padding-m font-size-m"
                         />
 
                         <input
                             required
                             minLength={2}
                             type="password"
+                            className="background padding-m font-size-m margin-top-s"
                             value={password}
                             onChange={(e) => setPassword(e.target.value)}
                             placeholder="Digite sua senha"
-                            className="background padding-m font-size-m margin-top-s"
                         />
 
                         <label className="font-size-m margin-top-s padding-top-s padding-bottom-s display-flex flex-items-center">
                             <input
-                                required
                                 type="checkbox"
+                                className="margin-right-s"
                                 checked={keepConnected}
                                 onChange={(e) => setKeepConnected(!keepConnected)}
-                                className="margin-right-s"
                             />
                             Manter conectado
                         </label>
@@ -69,11 +68,10 @@ export const Signin: React.FC = () => {
             <div className="dark-mode-container">
                 <label className="font-size-m padding-s display-flex flex-items-center">
                     <input
-                        required
                         type="checkbox"
+                        className="margin-right-s"
                         checked={isDark}
                         onChange={(e) => toggleDarkMode()}
-                        className="margin-right-s"
                     />
                     Tema escuro   
                 </label>
