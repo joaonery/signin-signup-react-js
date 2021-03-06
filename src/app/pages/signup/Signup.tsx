@@ -1,12 +1,14 @@
 import React, { useCallback, useRef, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, Route, useHistory } from 'react-router-dom';
 import ButtonPrimary from '../../shared/components/ButtonPrimary';
 import { useTheme } from '../../shared/hooks/useTheme';
+import { SignupService } from '../../shared/services/signup-service/SignupService';
 
 import './Signup.css';
 
 export const Signup: React.FC = () => {
     const repeatedPasswordRef = useRef<HTMLInputElement>(null);
+    const history = useHistory();
 
     const {isDark, toggleDarkMode} = useTheme();
 
@@ -45,16 +47,32 @@ export const Signup: React.FC = () => {
         }
     }, [password]);
 
-    const handleSubmit = useCallback((event: React.FormEvent<HTMLFormElement>) => {
+    const handleSubmit = useCallback(async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
 
-        console.log(email, password);
-    }, [email, password]);
+        const res = await SignupService.signup({
+            firstName,
+            lastName,
+            email,
+            password
+        });
+
+        if(res.success) {
+            history.push('/signin');
+        } else {
+            if(!res.messages || res.messages.length == 0){
+                alert('Erro no cadastro!');
+            } else {
+                alert(res.messages.join(',\n'));
+            }
+        }
+
+    }, [firstName, lastName, email, password]);
 
     return (
         <div className="signin-base flex-content-center flex-items-center">
             <div className="padding-g shake shadow-m border-radius-soft border-red flex-column flex-items-center background-paper">
-                <h2>Fazer login</h2>
+                <h2>Cadastre-se</h2>
 
                 <div className="margin-top-m ">
                     <form className="login-form flex-column" onSubmit={handleSubmit}>
@@ -109,25 +127,14 @@ export const Signup: React.FC = () => {
                             onChange={(e) => handleOnChangeRepeatedPassword(e.target.value)}
                             placeholder="Repetir senha"
                         />
-
-                        <label className="font-size-m margin-top-s padding-top-s padding-bottom-s display-flex flex-items-center">
-                            <input
-                                type="checkbox"
-                                className="margin-right-s"
-                                checked={keepConnected}
-                                onChange={(e) => setKeepConnected(!keepConnected)}
-                            />
-                            Manter conectado
-                        </label>
                         
-
                         <ButtonPrimary type="submit" variant="contained">
-                            Entrar
+                            Cadastre-se
                         </ButtonPrimary>
                     </form>
                 </div>
                 
-                <Link to="/sigin" className="font-size-m margin-top-m font-weight-g">Logar-se</Link>
+                <Link to="/signin" className="font-size-m margin-top-m font-weight-g">Logar-se</Link>
             </div>
 
             <div className="dark-mode-container">

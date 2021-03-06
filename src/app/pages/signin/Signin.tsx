@@ -62,7 +62,7 @@ export const Signin: React.FC = () => {
                     </form>
                 </div>
                 
-                <Link to="/signup" className="font-size-m margin-top-m font-weight-g">Cadastrar-se</Link>
+                <Link to="/signup" className="font-size-m margin-top-m font-weight-g">Criar nova conta</Link>
             </div>
 
             <div className="dark-mode-container">
